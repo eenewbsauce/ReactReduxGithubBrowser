@@ -1,4 +1,8 @@
 import React from 'react';
+//import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
+
 
 export default class RootView extends React.Component {
   static propTypes = {
@@ -8,7 +12,7 @@ export default class RootView extends React.Component {
   render () {
     return (
       <div>
-        <h3>Welcome To The Exercise</h3>
+        <h3>Welcome To The Exercise Again</h3>
         {this.props.children}
       </div>
     );
