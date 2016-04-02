@@ -24,7 +24,7 @@
   "homepage": "https://github.com/GasStationTV/react-coding-exercise#readme",
   "dependencies": {
     "react": "^0.14.8",
-    "react-dom": "^0.14.7",
+    "react-dom": "^0.14.8",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1"
   },
