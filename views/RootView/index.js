@@ -12,7 +12,7 @@ export default class RootView extends React.Component {
   render () {
     return (
       <div>
-        <h3>Welcome To The Exercise Again</h3>
+        <h3>Welcome To The Exercise</h3>
         {this.props.children}
       </div>
     );
