@@ -1,10 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 import { Provider, connect } from 'react-redux'
+import { REQUEST_USERS, RECEIVE_USERS, fetchUsers } from '../../src/actions'
 
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunkMiddleware,
+//   createLogger()
+// )(createStore)
 
-export default class RootView extends React.Component {
+export default class RootView extends Component {
   static propTypes = {
     children: React.PropTypes.any
   }
@@ -19,14 +26,25 @@ export default class RootView extends React.Component {
 }
 
 class Counter extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    //const { dispatch, selectedReddit } = this.props;
+    store.dispatch(fetchUsers());
+  }
+
   render() {
-    const { value, onIncreaseClick } = this.props
+    const { value, onIncreaseClick, loading, dispatch, fetchUsers } = this.props
     return (
       <div>
+        <p>{this.props.loading ? 'loading...' : ''}</p>
         <h3>Welcome To The Exercise</h3>
         {this.props.children}
         <span>{value}</span>
         <button onClick={onIncreaseClick}>Increase</button>
+        <button onClick={fetchUsers}>Fetch Users</button>
       </div>
     )
   }
@@ -34,37 +52,50 @@ class Counter extends Component {
 
 Counter.propTypes = {
   value: PropTypes.number.isRequired,
-  onIncreaseClick: PropTypes.func.isRequired
+  onIncreaseClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  dispatch: PropTypes.func,
+  fetchUsers: PropTypes.func
 }
 
 // Action
 const increaseAction = { type: 'increase' }
 
 // Reducer
-function counter(state = { count: 0 }, action) {
+function counter(state = { count: 0, loading: false }, action) {
   let count = state.count
   switch (action.type) {
     case 'increase':
-      return { count: count + 1 }
+      return { count: count + 1 };
+    case REQUEST_USERS:
+      return { loading: true };
+    case RECEIVE_USERS:
+      return { loading: false };
     default:
       return state
   }
 }
 
 // Store
-let store = createStore(counter)
+let store = createStore(counter, applyMiddleware(
+  thunkMiddleware,
+  createLogger())
+);
+
 
 // Map Redux state to component props
 function mapStateToProps(state) {
   return {
-    value: state.count
+    value: state.count,
+    loading: state.loading
   }
 }
 
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
   return {
-    onIncreaseClick: () => dispatch(increaseAction)
+    onIncreaseClick: () => dispatch(increaseAction),
+    fetchUsers: () => dispatch(fetchUsers())
   }
 }
 
