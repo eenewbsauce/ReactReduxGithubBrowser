@@ -4,7 +4,8 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import { Provider, connect } from 'react-redux'
-import { REQUEST_USERS, RECEIVE_USERS, fetchUsers } from '../../src/actions'
+import { fetchUsers } from '../../src/actions'
+import configureStore from '../../configurestore'
 
 // const createStoreWithMiddleware = applyMiddleware(
 //   thunkMiddleware,
@@ -26,9 +27,9 @@ export default class RootView extends Component {
 }
 
 class Counter extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     //const { dispatch, selectedReddit } = this.props;
@@ -62,26 +63,29 @@ Counter.propTypes = {
 const increaseAction = { type: 'increase' }
 
 // Reducer
-function counter(state = { count: 0, loading: false }, action) {
-  let count = state.count
-  switch (action.type) {
-    case 'increase':
-      return { count: count + 1 };
-    case REQUEST_USERS:
-      return { loading: true };
-    case RECEIVE_USERS:
-      return { loading: false };
-    default:
-      return state
-  }
-}
+// function counter(state = { count: 0 }, action) {
+//   let count = state.count
+//   switch (action.type) {
+//     case 'increase':
+//       return { count: count + 1 };
+//     case REQUEST_USERS:
+//       return { loading: true };
+//     case RECEIVE_USERS:
+//       return { loading: false };
+//     default:
+//       return state
+//   }
+// }
+
+
 
 // Store
-let store = createStore(counter, applyMiddleware(
-  thunkMiddleware,
-  createLogger())
-);
+// let store = createStore(counter, applyMiddleware(
+//   thunkMiddleware,
+//   createLogger()),
+// );
 
+const store = configureStore();
 
 // Map Redux state to component props
 function mapStateToProps(state) {
@@ -103,4 +107,4 @@ function mapDispatchToProps(dispatch) {
 let App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Counter)
+)(Counter )
