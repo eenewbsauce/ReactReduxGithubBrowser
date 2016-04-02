@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import { Provider, connect } from 'react-redux'
-import { fetchUsers } from '../../src/actions'
+import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
 
 // const createStoreWithMiddleware = applyMiddleware(
@@ -59,32 +59,6 @@ Counter.propTypes = {
   fetchUsers: PropTypes.func
 }
 
-// Action
-const increaseAction = { type: 'increase' }
-
-// Reducer
-// function counter(state = { count: 0 }, action) {
-//   let count = state.count
-//   switch (action.type) {
-//     case 'increase':
-//       return { count: count + 1 };
-//     case REQUEST_USERS:
-//       return { loading: true };
-//     case RECEIVE_USERS:
-//       return { loading: false };
-//     default:
-//       return state
-//   }
-// }
-
-
-
-// Store
-// let store = createStore(counter, applyMiddleware(
-//   thunkMiddleware,
-//   createLogger()),
-// );
-
 const store = configureStore();
 
 // Map Redux state to component props
@@ -98,7 +72,7 @@ function mapStateToProps(state) {
 // Map Redux actions to component props
 function mapDispatchToProps(dispatch) {
   return {
-    onIncreaseClick: () => dispatch(increaseAction),
+    onIncreaseClick: () => dispatch(increment()),
     fetchUsers: () => dispatch(fetchUsers())
   }
 }
