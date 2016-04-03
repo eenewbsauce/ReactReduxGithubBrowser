@@ -1,21 +1,17 @@
 import fetch from 'isomorphic-fetch';
-// import { store } from '../../views/RootView'
+import { store } from '../../views/RootView'
 
 export const REQUEST_USERS = 'REQUEST_USERS';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const INCREMENT = 'INCREMENT';
-
+export const REQUEST_PROFILE = 'REQUEST_PROFILE';
+export const RECEIVE_PROFILE = 'RECEIVE_PROFILE';
 
 export function fetchUsers() {
-  console.log('fetching...');
-
   return dispatch => {
     dispatch(requestUsers());
     return fetch(`https://api.github.com/users`)
-      .then(response => {
-        let tester = response.json();
-        return tester;
-      })
+      .then(response => response.json())
       .then(users => dispatch(receiveUsers(users)));
   };
 }
@@ -26,9 +22,31 @@ export function increment() {
   };
 }
 
+export function loadProfile(userName) {
+  return dispatch => {
+    store.dispatch(requestProfile());
+    return fetch(`https://api.github.com/users/${userName}`)
+      .then(response => response.json())
+      .then(profile => store.dispatch(receiveProfile(profile)));
+  };
+}
+
+function requestProfile() {
+  return {
+    type: REQUEST_PROFILE
+  };
+}
+
+function receiveProfile(profile) {
+  return {
+    type: RECEIVE_PROFILE,
+    profile: profile
+  };
+}
+
 function requestUsers() {
   return {
-    type: REQUEST_USERS
+    type: REQUEST_PROFILE
   };
 }
 

@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
 import { Provider, connect } from 'react-redux'
 import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
@@ -33,7 +30,7 @@ class AppContainer extends Component {
   }
 
   render() {
-    const { value, onIncreaseClick, loading, dispatch, fetchUsers } = this.props
+    const { value, onIncreaseClick, loading, fetchUsers } = this.props
     return (
       <div>
         <h3>Welcome To The Exercise</h3>
@@ -56,7 +53,7 @@ AppContainer.propTypes = {
   fetchUsers: PropTypes.func
 }
 
-const store = configureStore();
+export const store = configureStore();
 
 // Map Redux state to component props
 function mapStateToProps(state) {

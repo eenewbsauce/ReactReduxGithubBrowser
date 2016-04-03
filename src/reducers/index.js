@@ -1,4 +1,4 @@
-import { REQUEST_USERS, RECEIVE_USERS } from '../actions'
+import { REQUEST_USERS, RECEIVE_USERS, REQUEST_PROFILE, RECEIVE_PROFILE } from '../actions'
 
 let counter = function counter(state = { count: 0, users: [] }, action) {
   let count = state.count
@@ -10,6 +10,10 @@ let counter = function counter(state = { count: 0, users: [] }, action) {
       return { loading: true, count: count };
     case RECEIVE_USERS:
       return { loading: false, count: count, users: action.users };
+    case REQUEST_PROFILE:
+      return { loading: true, count: count };
+    case RECEIVE_PROFILE:
+      return { loading: false, count: count, profile: action.profile };
     default:
       return state;
   }
