@@ -4,16 +4,29 @@ import { store } from '../../views/rootview'
 
 export const REQUEST_SEARCH = 'REQUEST_SEARCH';
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
+export const UPDATE_QUERY = 'UPDATE_QUERY';
 
 export function search(query) {
-
-  return dispatch => {
-    store.dispatch(requestSearch(query));
-    return fetch(`https://api.github.com/search/users?q=${query}`)
-      .then(response => response.json())
-      .then(response => store.dispatch(receiveSearch(response.items)));
-  };
+  if (query.length >= 3) {
+    return dispatch => {
+      store.dispatch(requestSearch(query));
+      return fetch(`https://api.github.com/search/users?q=${query}`)
+        .then(response => response.json())
+        .then(response => store.dispatch(receiveSearch(response.items)));
+    };
+  } else {
+    return dispatch => {
+      store.dispatch(updateQuery(query));
+    };
+  }
 }
+
+export const updateQuery = function updateQuery(query) {
+  return {
+    type: UPDATE_QUERY,
+    query: query
+  };
+};
 
 function requestSearch(query) {
   return {

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import { search } from '../actions'
+import { search, updateQuery } from '../actions'
 import { store } from '../../views/rootview'
 
 class AutoCompleteClass extends Component {
@@ -11,7 +11,7 @@ class AutoCompleteClass extends Component {
 
     return (
       <div>
-        <input type='text' value={query} onChange={e => onSearch(e.target.value)} placeholder='search for users' />
+        <input type='text' value={query} onChange={e => onSearch(e, e.target.value)} placeholder='search for users' />
         <p></p>
       </div>
     );
@@ -37,12 +37,17 @@ function mapDispatchToProps(dispatch) {
 
 let timeout;
 
-function autoComplete(query) {
+function autoComplete(e, query) {
+  // //search immediately on backspace
+  // if (e.keyCode === 8) {
+  //   store.dispatch(search(query));
+  // }
+  store.dispatch(updateQuery(query));
   clearTimeout(timeout);
 
   timeout = setTimeout(() => {
     store.dispatch(search(query));
-  }, 200)
+  }, 300)
 }
 
 let AutoComplete = connect(mapStateToProps, mapDispatchToProps)(AutoCompleteClass)

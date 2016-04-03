@@ -4,7 +4,8 @@ import {
   REQUEST_PROFILE,
   RECEIVE_PROFILE,
   REQUEST_SEARCH,
-  RECEIVE_SEARCH
+  RECEIVE_SEARCH,
+  UPDATE_QUERY
  } from '../actions'
 
 let counter = function counter(state = { count: 0, users: [] }, action) {
@@ -25,7 +26,8 @@ let counter = function counter(state = { count: 0, users: [] }, action) {
         users: action.users
       };
     case REQUEST_PROFILE:
-      return { loading: true,
+      return {
+        loading: true,
         count: count,
         users: users
       };
@@ -37,16 +39,25 @@ let counter = function counter(state = { count: 0, users: [] }, action) {
         users: users
       };
     case REQUEST_SEARCH:
-      return { loading: true,
+      return {
+        loading: true,
         count: count,
         users: users,
         query: action.query
       };
     case RECEIVE_SEARCH:
-      return { loading: false,
+      return {
+        loading: false,
         count: count,
         users: action.users,
         query: query
+      };
+    case UPDATE_QUERY:
+      return {
+        loading: false,
+        count: count,
+        users: users,
+        query: action.query
       };
     default:
       return state;
