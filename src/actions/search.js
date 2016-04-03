@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-import { store } from '../../views/RootView'
+import { store } from '../../views/rootview'
 
 export const REQUEST_SEARCH = 'REQUEST_SEARCH';
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';

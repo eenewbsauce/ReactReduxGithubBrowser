@@ -25,8 +25,7 @@ AutoCompleteClass.propTypes = {
 // Map Redux state to component props
 function mapStateToProps(state) {
   return {
-    query: state.query,
-    onSearch
+    query: state.query
   }
 }
 
@@ -46,6 +45,6 @@ function autoComplete(query) {
   }, 200)
 }
 
-let AutoComplete = connect(mapDispatchToProps)(AutoCompleteClass)
+let AutoComplete = connect(mapStateToProps, mapDispatchToProps)(AutoCompleteClass)
 
 export default AutoComplete

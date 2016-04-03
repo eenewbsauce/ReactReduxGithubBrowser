@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
-import { store } from '../RootView'
+import { store } from '../rootview'
 import { loadProfile } from '../../src/actions'
 
 
