@@ -10,7 +10,8 @@ import {
 let counter = function counter(state = { count: 0, users: [] }, action) {
   let count = state.count
   let users = state.users
-  let query = state.query  
+  let query = state.query
+  let profile = state.profile
 
   switch (action.type) {
     case 'increase':
