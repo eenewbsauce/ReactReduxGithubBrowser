@@ -12,9 +12,6 @@ class UserListClass extends Component {
       <ul>
         {users.map((user, i) =>
           <li key={i} onClick={loadProfile(user.login)}>{user.login}</li>
-          /*<li key={i}>
-            <Link to={`/detail/${user.login}`}>{user.login}</Link>
-          </li>*/
         )}
       </ul>
     );

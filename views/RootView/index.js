@@ -6,7 +6,7 @@ import { syncHistoryWithStore, routerReducer, push } from 'react-router-redux'
 
 import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
-import UserList from '../../src/components/userlist'
+import { UserList, AutoComplete } from '../../src/components'
 import DetailView  from '../detail';
 
 //const history = syncHistoryWithStore(browserHistory, store)
@@ -38,6 +38,7 @@ class AppContainer extends Component {
     return (
       <div>
         <h3>Welcome To The Exercise</h3>
+        <AutoComplete />
         {this.props.children}
         <span>{value}</span>
         <button onClick={onIncreaseClick}>Increase</button>
