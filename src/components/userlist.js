@@ -7,6 +7,7 @@ import { loadProfile } from '../actions'
 class UserListClass extends Component {
   render () {
     const users = this.props.users ? this.props.users : [];
+
     return (
       <ul>
         {users.map((user, i) =>

@@ -42,7 +42,6 @@ class AppContainer extends Component {
         <span>{value}</span>
         <button onClick={onIncreaseClick}>Increase</button>
         <button onClick={fetchUsers}>Fetch Users</button>
-        <button onClick={backToListView}>List View</button>
         <UserList users={this.props.users}/>
         <p>{this.props.loading ? 'loading...' : ''}</p>
       </div>
@@ -73,8 +72,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onIncreaseClick: () => dispatch(increment()),
-    fetchUsers: () => dispatch(fetchUsers()),
-    backToListView: () => dispatch(push('/'))
+    fetchUsers: () => dispatch(fetchUsers())
   }
 }
 
