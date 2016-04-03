@@ -37,6 +37,7 @@ class AppContainer extends Component {
     const { value, onIncreaseClick, loading, fetchUsers, backToListView } = this.props
     return (
       <div>
+        <p>{this.props.loading ? 'loading...' : ''}</p>      
         <h3>Welcome To The Exercise</h3>
         <AutoComplete />
         {this.props.children}
@@ -44,7 +45,6 @@ class AppContainer extends Component {
         <button onClick={onIncreaseClick}>Increase</button>
         <button onClick={fetchUsers}>Fetch Users</button>
         <UserList users={this.props.users}/>
-        <p>{this.props.loading ? 'loading...' : ''}</p>
       </div>
     )
   }
