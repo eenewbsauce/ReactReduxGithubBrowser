@@ -10,10 +10,10 @@ class UserListClass extends Component {
     return (
       <ul>
         {users.map((user, i) =>
-          //{<li key={i} onClick={loadProfile(user.login)}>{user.login}</li>}
-          <li key={i}>
+          <li key={i} onClick={loadProfile(user.login)}>{user.login}</li>
+          /*<li key={i}>
             <Link to={`/detail/${user.login}`}>{user.login}</Link>
-          </li>
+          </li>*/
         )}
       </ul>
     );

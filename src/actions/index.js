@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import { browserHistory } from 'react-router'
+
 import { store } from '../../views/RootView'
 
 export const REQUEST_USERS = 'REQUEST_USERS';
@@ -27,7 +29,8 @@ export function loadProfile(userName) {
     store.dispatch(requestProfile());
     return fetch(`https://api.github.com/users/${userName}`)
       .then(response => response.json())
-      .then(profile => store.dispatch(receiveProfile(profile)));
+      .then(profile => store.dispatch(receiveProfile(profile)))
+      .then(() => browserHistory.push(`/detail/${userName}`));
   };
 }
 
