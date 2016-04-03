@@ -6,11 +6,7 @@ import createLogger from 'redux-logger'
 import { Provider, connect } from 'react-redux'
 import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
-
-// const createStoreWithMiddleware = applyMiddleware(
-//   thunkMiddleware,
-//   createLogger()
-// )(createStore)
+import UserList from '../../src/components/userlist'
 
 export default class RootView extends Component {
   static propTypes = {
@@ -26,7 +22,7 @@ export default class RootView extends Component {
   }
 }
 
-class Counter extends Component {
+class AppContainer extends Component {
   // constructor(props) {
   //   super(props);
   // }
@@ -40,18 +36,19 @@ class Counter extends Component {
     const { value, onIncreaseClick, loading, dispatch, fetchUsers } = this.props
     return (
       <div>
-        <p>{this.props.loading ? 'loading...' : ''}</p>
         <h3>Welcome To The Exercise</h3>
         {this.props.children}
         <span>{value}</span>
         <button onClick={onIncreaseClick}>Increase</button>
         <button onClick={fetchUsers}>Fetch Users</button>
+        <UserList users={this.props.users}/>
+        <p>{this.props.loading ? 'loading...' : ''}</p>
       </div>
     )
   }
 }
 
-Counter.propTypes = {
+AppContainer.propTypes = {
   value: PropTypes.number.isRequired,
   onIncreaseClick: PropTypes.func.isRequired,
   loading: PropTypes.bool,
@@ -65,7 +62,8 @@ const store = configureStore();
 function mapStateToProps(state) {
   return {
     value: state.count,
-    loading: state.loading
+    loading: state.loading,
+    users: state.users
   }
 }
 
@@ -81,4 +79,4 @@ function mapDispatchToProps(dispatch) {
 let App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Counter )
+)(AppContainer)
