@@ -20,9 +20,8 @@ export default class RootView extends Component {
     return (
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path="/" component={App}>
-            <Route path="/detail/:username" component={DetailView}/>
-          </Route>
+          <Route path="/" component={App}/>
+          <Route path="/detail/:username" component={DetailView}/>
         </Router>
       </Provider>
     );
