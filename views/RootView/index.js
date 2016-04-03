@@ -1,9 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider, connect } from 'react-redux'
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
 import UserList from '../../src/components/userlist'
+import DetailView  from '../detail';
+
+//const history = syncHistoryWithStore(browserHistory, store)
 
 export default class RootView extends Component {
   static propTypes = {
@@ -13,24 +19,23 @@ export default class RootView extends Component {
   render () {
     return (
       <Provider store={store}>
-        <App />
+        <Router history={browserHistory}>
+          <Route path="/" component={App}>
+            <Route path="/detail/:username" component={DetailView}/>
+          </Route>
+        </Router>
       </Provider>
     );
   }
 }
 
 class AppContainer extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   componentDidMount() {
-    //const { dispatch, selectedReddit } = this.props;
     store.dispatch(fetchUsers());
   }
 
   render() {
-    const { value, onIncreaseClick, loading, fetchUsers } = this.props
+    const { value, onIncreaseClick, loading, fetchUsers, backToListView } = this.props
     return (
       <div>
         <h3>Welcome To The Exercise</h3>
@@ -38,6 +43,7 @@ class AppContainer extends Component {
         <span>{value}</span>
         <button onClick={onIncreaseClick}>Increase</button>
         <button onClick={fetchUsers}>Fetch Users</button>
+        <button onClick={backToListView}>List View</button>
         <UserList users={this.props.users}/>
         <p>{this.props.loading ? 'loading...' : ''}</p>
       </div>
@@ -68,7 +74,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onIncreaseClick: () => dispatch(increment()),
-    fetchUsers: () => dispatch(fetchUsers())
+    fetchUsers: () => dispatch(fetchUsers()),
+    backToListView: () => dispatch(push('/'))
   }
 }
 

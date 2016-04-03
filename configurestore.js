@@ -1,8 +1,17 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from './src/reducers'
+import { routerReducer } from 'react-router-redux'
 
+// const createStoreWithMiddleware = applyMiddleware(
+//   thunkMiddleware,
+//   createLogger()
+// )(createStore(combineReducers({
+//   ...rootReducer,
+//   routing: routerReducer
+// })))
+//
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
   createLogger()
