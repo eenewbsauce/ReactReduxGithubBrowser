@@ -29,9 +29,9 @@ export default class RootView extends Component {
 }
 
 class AppContainer extends Component {
-  componentDidMount() {
-    store.dispatch(fetchUsers());
-  }
+  // componentDidMount() {
+  //   store.dispatch(fetchUsers());
+  // }
 
   render() {
     const { value, onIncreaseClick, loading, fetchUsers, backToListView } = this.props
@@ -41,7 +41,15 @@ class AppContainer extends Component {
         <h3>Github User Search</h3>
         <AutoComplete />
         {this.props.children}
-        <UserList users={this.props.users}/>
+        {this.props.users.length > 0 &&
+          <UserList users={this.props.users}/>
+        }
+        {this.props.users.length === 0 && this.props.query.length === 0 &&
+          <p>Please search to find users</p>
+        }
+        {this.props.users.length === 0 && this.props.query.length > 0 &&
+          <p>Your search returned no results. Please search for another user.</p>
+        }
       </div>
     )
   }
@@ -62,7 +70,8 @@ function mapStateToProps(state) {
   return {
     value: state.count,
     loading: state.loading,
-    users: state.users
+    users: state.users,
+    query: state.query
   }
 }
 

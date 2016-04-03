@@ -8,7 +8,7 @@ import {
   UPDATE_QUERY
  } from '../actions'
 
-let counter = function counter(state = { count: 0, users: [] }, action) {
+let counter = function counter(state = { count: 0, users: [], query: '' }, action) {
   let count = state.count
   let users = state.users
   let query = state.query
@@ -56,7 +56,7 @@ let counter = function counter(state = { count: 0, users: [] }, action) {
       return {
         loading: false,
         count: count,
-        users: users,
+        users: action.query.length < 3 ? [] : users,
         query: action.query
       };
     default:
