@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import { loadProfile } from '../actions'
 
@@ -9,7 +10,10 @@ class UserListClass extends Component {
     return (
       <ul>
         {users.map((user, i) =>
-          <li key={i} onClick={loadProfile(user.login)}>{user.login}</li>
+          //{<li key={i} onClick={loadProfile(user.login)}>{user.login}</li>}
+          <li key={i}>
+            <Link to={`/detail/${user.login}`}>{user.login}</Link>
+          </li>
         )}
       </ul>
     );

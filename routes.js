@@ -2,11 +2,11 @@ import React         from 'react';
 import { Route }     from 'react-router';
 
 import HomeView  from './views/RootView';
-import FishView  from './views/FishView';
+import DetailView  from './views/detail';
 
 const routes = (
   <Route path="/" component={HomeView} >
-    <Route path='fish' component={FishView} />
+    <Route path='/detail/:username' component={DetailView} />
   </Route>
 );
 
