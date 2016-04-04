@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { browserHistory } from 'react-router'
+let q = require('q');
 
 import { store } from '../../views/rootview'
 
@@ -26,10 +27,26 @@ export function increment() {
 
 export function loadProfile(userName) {
   return dispatch => {
+    let profile;
     store.dispatch(requestProfile());
-    return fetch(`https://api.github.com/users/${userName}`)
+    fetch(`https://api.github.com/users/${userName}`)
       .then(response => response.json())
-      .then(profile => store.dispatch(receiveProfile(profile)))
+      .then(response => {
+        profile = response;
+        return fetch(profile.repos_url)
+      })
+      .then(response => response.json())
+      .then(repos => {
+        profile.repos_fetched = repos;
+      })
+      .then(response => {
+        return fetch(profile.followers_url)
+      })
+      .then(response => response.json())
+      .then(followers => {
+        profile.followers_fetched = followers;
+        store.dispatch(receiveProfile(profile))
+      })
       .then(() => browserHistory.push(`/detail/${userName}`));
   };
 }
