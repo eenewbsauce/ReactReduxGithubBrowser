@@ -28,12 +28,26 @@ export default class DetailViewClass extends Component {
                 <li>Company: {profile.company}</li>
                 <li>Blog: {profile.blog}</li>
                 <li>Location: {profile.location}</li>
-                <li>Email: {profile.email}</li>
+                <li>
+                  Email:
+                  <a href={`mailto:${profile.email}`}>Send Now!</a>
+                </li>
                 <li>Bio: {profile.bio}</li>
                 <li>Date Joined: {new Date(profile.created_at).toDateString()}</li>
-
-
               </ul>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <ul>
+                {profile.repos_fetched.map((repo, i) =>
+                  <li key={i}>
+                    <a href={repo.url}>{repo.name}></a>
+                  </li>
+                )}
+              </ul>
+            </div>
+            <div className="col-md-6">
             </div>
           </div>
         </div>
