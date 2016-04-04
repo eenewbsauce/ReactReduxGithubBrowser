@@ -10,7 +10,7 @@ import { UserList, AutoComplete } from '../../src/components'
 import DetailView  from '../detail';
 
 //const history = syncHistoryWithStore(browserHistory, store)
-
+require('../../styles/base.scss')
 export default class RootView extends Component {
   static propTypes = {
     children: React.PropTypes.any
