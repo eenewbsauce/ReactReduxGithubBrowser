@@ -29,8 +29,8 @@ export default class DetailViewClass extends Component {
                 <li>Blog: {profile.blog}</li>
                 <li>Location: {profile.location}</li>
                 <li>
-                  Email:
-                  <a href={`mailto:${profile.email}`}>Send Now!</a>
+                  Email:&nbsp;
+                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
                 </li>
                 <li>Bio: {profile.bio}</li>
                 <li>Date Joined: {new Date(profile.created_at).toDateString()}</li>
@@ -42,12 +42,19 @@ export default class DetailViewClass extends Component {
               <ul>
                 {profile.repos_fetched.map((repo, i) =>
                   <li key={i}>
-                    <a href={repo.url}>{repo.name}></a>
+                    <a href={repo.url}>{repo.name}</a>
                   </li>
                 )}
               </ul>
             </div>
             <div className="col-md-6">
+              <ul>
+                {profile.followers_fetched.map((follower, i) =>
+                  <li key={i}>
+                    <a href={follower.url}>{follower.login}</a>
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
         </div>
