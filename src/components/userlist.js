@@ -21,7 +21,7 @@ class UserListClass extends Component {
         {users.map((user, i) =>
           <tr key={i}>
             <td>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCu-a8gnOGzYBD1THxSBjEk2fVpYrdlhyFbSe87fVaKbLCwKQcCyjkCw" />
+              <img className="img-circle" src={user.avatar_url} />
             </td>
             <td>
               {user.login}
