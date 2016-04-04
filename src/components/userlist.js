@@ -9,11 +9,30 @@ class UserListClass extends Component {
     const users = this.props.users ? this.props.users : [];
 
     return (
-      <ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Username</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
         {users.map((user, i) =>
-          <li key={i} onClick={loadProfile(user.login)}>{user.login}</li>
+          <tr key={i}>
+            <td>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCu-a8gnOGzYBD1THxSBjEk2fVpYrdlhyFbSe87fVaKbLCwKQcCyjkCw" />
+            </td>
+            <td>
+              {user.login}
+            </td>
+            <td>
+              <button onClick={loadProfile(user.login)}>Details</button>
+            </td>
+          </tr>
         )}
-      </ul>
+        </tbody>
+      </table>
     );
   }
 }
