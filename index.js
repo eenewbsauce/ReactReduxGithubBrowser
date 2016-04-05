@@ -2,7 +2,6 @@ import React         from 'react';
 import { Route }     from 'react-router';
 import ReactDOM from 'react-dom'
 
-import HomeView  from './views/rootview';
-import DetailView  from './views/detail';
+import RootView  from './views/rootview';
 
-ReactDOM.render(<HomeView />, document.getElementById('root'));
+ReactDOM.render(<RootView />, document.getElementById('root'));
