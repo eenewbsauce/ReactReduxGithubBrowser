@@ -5,12 +5,15 @@ import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
 import { UserList, AutoComplete } from '../../src/components'
 
+var classNames = require('classnames');
+
 class UserViewClass extends Component {
   render() {
     const { loading } = this.props
+    var btnClass = classNames('loading', { 'isLoading': this.props.loading })
     return (
       <div>
-        <p>{this.props.loading ? 'loading...' : ''}</p>
+        <div className={btnClass}></div>
         <h3>Github User Search</h3>
         <AutoComplete />
         {this.props.users.length > 0 &&

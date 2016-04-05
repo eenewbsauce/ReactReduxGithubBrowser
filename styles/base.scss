@@ -56,7 +56,7 @@ table {
   background-color: rgba(125, 161, 208, 0.58);
 
   &.isLoading {
-    animation-duration: 1.5s;
+    animation-duration: 0.5s;
     animation-name: loadingAnimation;
     animation-iteration-count: infinite;
   }
