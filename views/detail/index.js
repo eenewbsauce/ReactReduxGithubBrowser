@@ -14,7 +14,7 @@ export default class DetailViewClass extends Component {
 
     return (
       <div>
-        <h4>Detail View</h4>
+        <h2>Detail View</h2>
         <button onClick={backToListView}>Back to List View</button>
         <div className="container">
           <div className="row">
@@ -23,22 +23,37 @@ export default class DetailViewClass extends Component {
             </div>
             <div className="col-md-6">
               <ul>
-                <li>Username: {profile.login}</li>
-                <li>Name: {profile.name}</li>
-                <li>Company: {profile.company}</li>
-                <li>Blog: {profile.blog}</li>
-                <li>Location: {profile.location}</li>
-                <li>
-                  Email:&nbsp;
-                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                </li>
-                <li>Bio: {profile.bio}</li>
+                {profile.login &&
+                  <li>Username: {profile.login}</li>
+                }
+                {profile.name &&
+                  <li>Name: {profile.name}</li>
+                }
+                {profile.company &&
+                  <li>Company: {profile.company}</li>
+                }
+                {profile.blog &&
+                  <li>Blog: {profile.blog}</li>
+                }
+                {profile.location &&
+                  <li>Location: {profile.location}</li>
+                }
+                {profile.email &&
+                  <li>
+                    Email:&nbsp;
+                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                  </li>
+                }
+                {profile.bio &&
+                  <li>Bio: {profile.bio}</li>
+                }
                 <li>Date Joined: {new Date(profile.created_at).toDateString()}</li>
               </ul>
             </div>
           </div>
           <div className="row">
             <div className="col-md-6">
+              <h3>{profile.login}&rsquo;s Repositories</h3>
               <ul>
                 {profile.repos_fetched.map((repo, i) =>
                   <li key={i}>
@@ -48,6 +63,7 @@ export default class DetailViewClass extends Component {
               </ul>
             </div>
             <div className="col-md-6">
+              <h3>{profile.login}&rsquo;s Followers</h3>            
               <ul>
                 {profile.followers_fetched.map((follower, i) =>
                   <li key={i}>
