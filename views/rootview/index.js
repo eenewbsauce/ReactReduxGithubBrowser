@@ -41,7 +41,6 @@ class AppContainer extends Component {
         <p>{this.props.loading ? 'loading...' : ''}</p>
         <h3>Github User Search</h3>
         <AutoComplete />
-        {this.props.children}
         {this.props.users.length > 0 &&
           <UserList users={this.props.users}/>
         }

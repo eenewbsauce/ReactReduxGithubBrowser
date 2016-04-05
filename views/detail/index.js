@@ -8,78 +8,77 @@ import { loadProfile } from '../../src/actions'
 
 export default class DetailViewClass extends Component {
   componentWillMount() {
-    console.log(this)
     store.dispatch(loadProfile(this.props.params.username))
-    //this.props.profile(this.props.params.useranme)
-    this.forceUpdate();
   }
 
   render () {
     const { profile, backToListView } = this.props;
-    console.log(profile);
 
     return (
       <div>
+        <p>{this.props.loading ? 'loading...' : ''}</p>
         <h2>Detail View</h2>
         <button onClick={backToListView}>Back to List View</button>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <img src={profile.avatar_url} className="img-cirle" />
+        {profile &&
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <img src={profile.avatar_url} className="img-cirle" />
+              </div>
+              <div className="col-md-6">
+                <ul>
+                  {profile.login &&
+                    <li>Username: {profile.login}</li>
+                  }
+                  {profile.name &&
+                    <li>Name: {profile.name}</li>
+                  }
+                  {profile.company &&
+                    <li>Company: {profile.company}</li>
+                  }
+                  {profile.blog &&
+                    <li>Blog: {profile.blog}</li>
+                  }
+                  {profile.location &&
+                    <li>Location: {profile.location}</li>
+                  }
+                  {profile.email &&
+                    <li>
+                      Email:&nbsp;
+                      <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                    </li>
+                  }
+                  {profile.bio &&
+                    <li>Bio: {profile.bio}</li>
+                  }
+                  <li>Date Joined: {new Date(profile.created_at).toDateString()}</li>
+                </ul>
+              </div>
             </div>
-            <div className="col-md-6">
-              <ul>
-                {profile.login &&
-                  <li>Username: {profile.login}</li>
-                }
-                {profile.name &&
-                  <li>Name: {profile.name}</li>
-                }
-                {profile.company &&
-                  <li>Company: {profile.company}</li>
-                }
-                {profile.blog &&
-                  <li>Blog: {profile.blog}</li>
-                }
-                {profile.location &&
-                  <li>Location: {profile.location}</li>
-                }
-                {profile.email &&
-                  <li>
-                    Email:&nbsp;
-                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                  </li>
-                }
-                {profile.bio &&
-                  <li>Bio: {profile.bio}</li>
-                }
-                <li>Date Joined: {new Date(profile.created_at).toDateString()}</li>
-              </ul>
+            <div className="row">
+              <div className="col-md-6">
+                <h3>{profile.login}&rsquo;s Repositories</h3>
+                <ul>
+                  {profile.repos_fetched.map((repo, i) =>
+                    <li key={i}>
+                      <a href={repo.url}>{repo.name}</a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+              <div className="col-md-6">
+                <h3>{profile.login}&rsquo;s Followers</h3>
+                <ul>
+                  {profile.followers_fetched.map((follower, i) =>
+                    <li key={i}>
+                      <a href={follower.url}>{follower.login}</a>
+                    </li>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-6">
-              <h3>{profile.login}&rsquo;s Repositories</h3>
-              <ul>
-                {profile.repos_fetched.map((repo, i) =>
-                  <li key={i}>
-                    <a href={repo.url}>{repo.name}</a>
-                  </li>
-                )}
-              </ul>
-            </div>
-            <div className="col-md-6">
-              <h3>{profile.login}&rsquo;s Followers</h3>
-              <ul>
-                {profile.followers_fetched.map((follower, i) =>
-                  <li key={i}>
-                    <a href={follower.url}>{follower.login}</a>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
+        }
       </div>
     );
   }
@@ -88,7 +87,8 @@ export default class DetailViewClass extends Component {
 // Map Redux state to component props
 function mapStateToProps(state) {
   return {
-    profile: state.profile
+    profile: state.profile,
+    loading: state.loading
   }
 }
 
