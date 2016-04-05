@@ -27,7 +27,7 @@ class UserListClass extends Component {
               {user.login}
             </td>
             <td>
-              <button onClick={loadProfile(user.login)}>Details</button>
+              <button onClick={loadProfile(user.login)} className="primary">Details</button>
             </td>
           </tr>
         )}

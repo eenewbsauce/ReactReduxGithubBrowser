@@ -1,4 +1,13 @@
-/*BEM
-B-Block(component)
-E-Element(tag)
-M-Modifier(version/state)*/
+@import './bootstrap';
+
+img {
+  max-width: 150px;
+}
+
+button {
+  @extend .btn;
+
+  &.primary {
+    @extend .btn-primary;
+  }
+}
