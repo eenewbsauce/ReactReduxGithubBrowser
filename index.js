@@ -5,4 +5,4 @@ import ReactDOM from 'react-dom'
 import HomeView  from './views/rootview';
 import DetailView  from './views/detail';
 
-ReactDOM.render(<HomeView />, document.body);
+ReactDOM.render(<HomeView />, document.getElementById('root'));

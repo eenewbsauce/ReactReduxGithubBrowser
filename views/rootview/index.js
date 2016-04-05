@@ -35,7 +35,7 @@ class AppContainer extends Component {
   // }
 
   render() {
-    const { value, onIncreaseClick, loading, fetchUsers, backToListView } = this.props
+    const { loading } = this.props
     return (
       <div>
         <p>{this.props.loading ? 'loading...' : ''}</p>
@@ -57,11 +57,7 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-  value: PropTypes.number.isRequired,
-  onIncreaseClick: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  dispatch: PropTypes.func,
-  fetchUsers: PropTypes.func
+  loading: PropTypes.bool
 }
 
 export const store = configureStore();

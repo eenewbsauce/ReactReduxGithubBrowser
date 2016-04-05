@@ -7,6 +7,12 @@ import { loadProfile } from '../../src/actions'
 
 
 export default class DetailViewClass extends Component {
+  componentWillMount() {
+    console.log(this)
+    store.dispatch(loadProfile(this.props.params.username))
+    //this.props.profile(this.props.params.useranme)
+    this.forceUpdate();
+  }
 
   render () {
     const { profile, backToListView } = this.props;
@@ -19,7 +25,7 @@ export default class DetailViewClass extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <img src={profile.avatar_url} />
+              <img src={profile.avatar_url} className="img-cirle" />
             </div>
             <div className="col-md-6">
               <ul>
@@ -63,7 +69,7 @@ export default class DetailViewClass extends Component {
               </ul>
             </div>
             <div className="col-md-6">
-              <h3>{profile.login}&rsquo;s Followers</h3>            
+              <h3>{profile.login}&rsquo;s Followers</h3>
               <ul>
                 {profile.followers_fetched.map((follower, i) =>
                   <li key={i}>
