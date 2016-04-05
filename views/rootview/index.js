@@ -9,7 +9,6 @@ import LayoutView  from '../layout';
 import UserView  from '../users';
 import DetailView  from '../detail';
 
-require('../../styles/bootstrap.css')
 require('../../styles/base.scss')
 
 export default class RootView extends Component {
