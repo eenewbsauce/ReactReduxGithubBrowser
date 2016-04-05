@@ -23,7 +23,7 @@ export default class DetailViewClass extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <img src={profile.avatar_url} className="img-cirle" />
+                <img src={profile.avatar_url} className="img-circle" />
               </div>
               <div className="col-md-6">
                 <ul>

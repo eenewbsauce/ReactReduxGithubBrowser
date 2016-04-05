@@ -10,6 +10,8 @@ import UserView  from '../users';
 import DetailView  from '../detail';
 
 require('../../styles/bootstrap.css')
+require('../../styles/base.scss')
+
 export default class RootView extends Component {
   static propTypes = {
     children: React.PropTypes.any
@@ -20,8 +22,8 @@ export default class RootView extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route component={LayoutView}>
-            <Route path="/" component={{main:UserView}} />
-            <Route path="/detail/:username" component={{main:DetailView}} />
+            <Route path="/" components={{main:UserView}} />
+            <Route path="/detail/:username" components={{main:DetailView}} />
           </Route>
         </Router>
       </Provider>
