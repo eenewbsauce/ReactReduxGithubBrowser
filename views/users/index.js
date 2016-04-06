@@ -9,11 +9,8 @@ var classNames = require('classnames');
 
 class UserViewClass extends Component {
   render() {
-    const { loading } = this.props
-    var btnClass = classNames('loading', { 'isLoading': this.props.loading })
     return (
       <div>
-        <div className={btnClass}></div>
         {this.props.users.length > 0 &&
           <UserList users={this.props.users}/>
         }
