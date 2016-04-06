@@ -12,7 +12,7 @@ let counter = function counter(state = { count: 0, users: [], query: '' }, actio
   let users = state.users
   let searchHeaders = state.searchHeaders
   let query = state.query
-  let profile = state.profil
+  let profile = state.profile
   let canInfiniteScroll = state.canInfiniteScroll;
 
   switch (action.type) {
@@ -39,6 +39,7 @@ let counter = function counter(state = { count: 0, users: [], query: '' }, actio
         users: users,
         searchHeaders: searchHeaders,
         query: action.query,
+        profile: profile,        
         canInfiniteScroll: canInfiniteScroll
       };
     case RECEIVE_SEARCH:
@@ -47,6 +48,7 @@ let counter = function counter(state = { count: 0, users: [], query: '' }, actio
         users: action.data.users,
         searchHeaders: action.data.searchHeaders,
         query: query,
+        profile: profile,
         canInfiniteScroll: true
       };
     case UPDATE_QUERY:
