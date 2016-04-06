@@ -14,8 +14,6 @@ class UserViewClass extends Component {
     return (
       <div>
         <div className={btnClass}></div>
-        <h3>Github User Search</h3>
-        <AutoComplete />
         {this.props.users.length > 0 &&
           <UserList users={this.props.users}/>
         }

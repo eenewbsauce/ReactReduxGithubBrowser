@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import AutoComplete from '../../src/components/autocomplete'
 
 export default class LayoutView extends Component {
   render () {
@@ -7,7 +8,14 @@ export default class LayoutView extends Component {
       <div className="layout">
         <nav className="navbar">
           <div className="container">
-            <p>Ryan</p>
+            <div className="row">
+              <div className="col-md-6">
+                <span className="navbar-brand">Github User Search</span>
+              </div>
+              <div className="col-md-6">
+                <AutoComplete />
+              </div>
+            </div>
           </div>
         </nav>
         {main}

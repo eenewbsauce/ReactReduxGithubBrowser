@@ -10,8 +10,8 @@ class AutoCompleteClass extends Component {
     const { query, onSearch } = this.props;
 
     return (
-      <div>
-        <input type='text' value={query} onChange={e => onSearch(e, e.target.value)} placeholder='search for users' />
+      <div className="autocomplete">
+        <input type='text' value={query} onChange={e => onSearch(e, e.target.value)} placeholder='Search for users' />
         <p></p>
       </div>
     );
