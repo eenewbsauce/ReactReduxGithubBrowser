@@ -17,7 +17,10 @@ class UserViewClass extends Component {
         {this.props.users.length === 0 && this.props.query.length === 0 &&
           <p>Please search to find users</p>
         }
-        {this.props.users.length === 0 && this.props.query.length > 0 &&
+        {this.props.users.length === 0 && this.props.query.length < 3 &&
+          <p>Keep searching to narrow it down</p>
+        }
+        {this.props.users.length === 0 && this.props.query.length > 3 &&
           <p>Your search returned no results. Please search for another user.</p>
         }
       </div>

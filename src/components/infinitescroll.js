@@ -9,8 +9,8 @@ class InfiniteScrollClass extends Component {
     window.addEventListener('scroll', this.handleScroll);
   }
 
-  handleScroll() {
-    console.log('I scrolled');
+  handleScroll(e) {
+    console.log(e);
   }
 
   render () {
