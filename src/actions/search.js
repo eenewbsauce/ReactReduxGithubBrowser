@@ -6,14 +6,23 @@ import { store } from '../../views/rootview'
 export const REQUEST_SEARCH = 'REQUEST_SEARCH';
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 export const UPDATE_QUERY = 'UPDATE_QUERY';
+export const NEXT_PAGE = 'NEXT_PAGE';
 
 export function search(query) {
+  let searchHeaders;
+
   if (query.length >= 3) {
     return dispatch => {
       store.dispatch(requestSearch(query));
       return fetch(`https://api.github.com/search/users?q=${query}`)
-        .then(response => response.json())
-        .then(response => store.dispatch(receiveSearch(response.items)))
+        .then(response => {
+          searchHeaders = response.headers;
+          return response.json()
+        })
+        .then(response => store.dispatch(receiveSearch({
+          users: response.items,
+          searchHeaders: searchHeaders
+        })))
         .then(() => {
           browserHistory.push('/');
         });
@@ -22,6 +31,27 @@ export function search(query) {
     return dispatch => {
       store.dispatch(updateQuery(query));
     };
+  }
+}
+
+export function nextPage() {
+  console.log('next page');
+  let state = store.getState();
+  let nextData = state.searchHeaders.get('link')
+  let next = /<(.*?)>/.exec(nextData)[1];
+  let searchHeaders;
+
+  return dispatch => {
+    store.dispatch(requestSearch(state.query));
+    return fetch(next)
+      .then(response => {
+        searchHeaders = response.headers;
+        return response.json();
+      })
+      .then(response => store.dispatch(receiveSearch({
+        users: state.users.concat(response.items),
+        searchHeaders: searchHeaders
+      })))
   }
 }
 
@@ -39,9 +69,9 @@ function requestSearch(query) {
   };
 }
 
-function receiveSearch(users) {
+function receiveSearch(data) {
   return {
     type: RECEIVE_SEARCH,
-    users: users
+    data: data
   };
 }

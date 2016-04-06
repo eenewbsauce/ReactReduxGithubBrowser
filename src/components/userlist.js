@@ -26,7 +26,7 @@ class UserListClass extends Component {
                 <img className="img-circle" src={user.avatar_url} />
               </td>
               <td>
-                {user.login}
+                {i} {user.login}
               </td>
               <td>
                 <button onClick={loadProfile(user.login)} className="primary">Details</button>

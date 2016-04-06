@@ -9,6 +9,7 @@ import {
 let counter = function counter(state = { count: 0, users: [], query: '' }, action) {
   let count = state.count
   let users = state.users
+  let searchHeaders = state.searchHeaders
   let query = state.query
   let profile = state.profile
 
@@ -30,18 +31,21 @@ let counter = function counter(state = { count: 0, users: [], query: '' }, actio
       return {
         loading: true,
         users: users,
+        searchHeaders: searchHeaders,
         query: action.query
       };
     case RECEIVE_SEARCH:
       return {
         loading: false,
-        users: action.users,
+        users: action.data.users,
+        searchHeaders: action.data.searchHeaders,
         query: query
       };
     case UPDATE_QUERY:
       return {
         loading: false,
         users: action.query.length < 3 ? [] : users,
+        searchHeaders: searchHeaders,
         query: action.query
       };
     default:

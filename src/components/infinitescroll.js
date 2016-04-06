@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-let $ = require('jquery');
 
 import { store } from '../../views/rootview'
+import { nextPage } from '../actions'
 
 class InfiniteScrollClass extends Component {
 
@@ -13,17 +13,19 @@ class InfiniteScrollClass extends Component {
   handleScroll(e) {
     let scrollY = window.scrollY;
     let documentHeight = document.body.clientHeight;
-    let loadingOffset = 250;
+    let loadingOffset = 1000;
 
-    if (outerHeight - scrollY <= loadingOffset) {
+    console.log(scrollY)
+    console.log(documentHeight)
+
+    if (documentHeight - scrollY <= loadingOffset) {
+      window.removeEventListener('scroll', this.handleScroll)
       this.props.loadMore();
     }
   }
 
   render () {
-    return (
-      <p>chacoop</p>
-    );
+    return false;
   }
 }
 
@@ -40,8 +42,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    //loadMore: store.dispatch(loadMore());
-    loadMore: () => {console.log('load more baby')}
+    loadMore: () => store.dispatch(nextPage())
   }
 }
 
