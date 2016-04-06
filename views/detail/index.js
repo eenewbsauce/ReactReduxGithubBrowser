@@ -16,7 +16,7 @@ export default class DetailViewClass extends Component {
 
     return (
       <div>
-        <button onClick={backToListView} className="primary">Back to List View</button>      
+        <button onClick={backToListView} className="primary">Back to List View</button>
         <h2>Detail View</h2>
         {profile &&
           <div className="container">
@@ -60,7 +60,7 @@ export default class DetailViewClass extends Component {
                 <ul>
                   {profile.repos_fetched.map((repo, i) =>
                     <li key={i}>
-                      <a href={repo.url}>{repo.name}</a>
+                      <a href={repo.html_url}>{repo.name}</a>
                     </li>
                   )}
                 </ul>
@@ -70,7 +70,7 @@ export default class DetailViewClass extends Component {
                 <ul>
                   {profile.followers_fetched.map((follower, i) =>
                     <li key={i}>
-                      <a href={follower.url}>{follower.login}</a>
+                      <a href={follower.html_url}>{follower.login}</a>
                     </li>
                   )}
                 </ul>
