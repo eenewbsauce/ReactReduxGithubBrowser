@@ -16,9 +16,8 @@ export default class DetailViewClass extends Component {
 
     return (
       <div>
-        <p>{this.props.loading ? 'loading...' : ''}</p>
+        <button onClick={backToListView} className="primary">Back to List View</button>      
         <h2>Detail View</h2>
-        <button onClick={backToListView} className="primary">Back to List View</button>
         {profile &&
           <div className="container">
             <div className="row">
