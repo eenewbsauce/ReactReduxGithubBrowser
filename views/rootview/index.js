@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
 
-//import { store } from '../users'
 import { fetchUsers, increment } from '../../src/actions'
 import configureStore from '../../configurestore'
 import LayoutView  from '../layout';

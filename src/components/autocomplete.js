@@ -37,10 +37,6 @@ function mapDispatchToProps(dispatch) {
 let timeout;
 
 function autoComplete(e, query) {
-  // //search immediately on backspace
-  // if (e.keyCode === 8) {
-  //   store.dispatch(search(query));
-  // }
   store.dispatch(updateQuery(query));
   clearTimeout(timeout);
 

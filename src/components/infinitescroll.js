@@ -15,9 +15,6 @@ class InfiniteScrollClass extends Component {
     let documentHeight = document.body.clientHeight;
     let loadingOffset = 1000;
 
-    //console.log(scrollY)
-    //console.log(documentHeight)
-
     if (documentHeight - scrollY <= loadingOffset && store.getState().canInfiniteScroll) {      
       this.props.loadMore();
     }
