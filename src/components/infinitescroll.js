@@ -1,16 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+let $ = require('jquery');
 
 import { store } from '../../views/rootview'
 
 class InfiniteScrollClass extends Component {
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
   handleScroll(e) {
-    console.log(e);
+    let scrollY = window.scrollY;
+    let documentHeight = document.body.clientHeight;
+    let loadingOffset = 250;
+
+    if (outerHeight - scrollY <= loadingOffset) {
+      this.props.loadMore();
+    }
   }
 
   render () {

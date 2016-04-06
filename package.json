@@ -26,7 +26,7 @@
     "bluebird": "^3.3.4",
     "classnames": "^2.2.3",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "^2.2.2",
+    "jquery": "^2.2.3",
     "q": "^1.4.1",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
