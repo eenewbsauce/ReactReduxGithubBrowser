@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { browserHistory } from 'react-router'
 
 import { store } from '../../views/rootview'
 
@@ -12,7 +13,10 @@ export function search(query) {
       store.dispatch(requestSearch(query));
       return fetch(`https://api.github.com/search/users?q=${query}`)
         .then(response => response.json())
-        .then(response => store.dispatch(receiveSearch(response.items)));
+        .then(response => store.dispatch(receiveSearch(response.items)))
+        .then(() => {
+          browserHistory.push('/');
+        });
     };
   } else {
     return dispatch => {
