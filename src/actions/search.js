@@ -7,6 +7,7 @@ export const REQUEST_SEARCH = 'REQUEST_SEARCH';
 export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 export const UPDATE_QUERY = 'UPDATE_QUERY';
 export const NEXT_PAGE = 'NEXT_PAGE';
+export const DISABLE_INFINITE_SCROLL = 'DISABLE_INFINITE_SCROLL';
 
 export function search(query) {
   let searchHeaders;
@@ -19,10 +20,15 @@ export function search(query) {
           searchHeaders = response.headers;
           return response.json()
         })
-        .then(response => store.dispatch(receiveSearch({
-          users: response.items,
-          searchHeaders: searchHeaders
-        })))
+        .then(response => {
+          store.dispatch(
+            receiveSearch({
+              users: response.items,
+              searchHeaders: searchHeaders
+            })
+          );
+          checkToDisableInfiniteScroll(response);
+        })
         .then(() => {
           browserHistory.push('/');
         });
@@ -48,10 +54,15 @@ export function nextPage() {
         searchHeaders = response.headers;
         return response.json();
       })
-      .then(response => store.dispatch(receiveSearch({
-        users: state.users.concat(response.items),
-        searchHeaders: searchHeaders
-      })))
+      .then(response => {
+        store.dispatch(
+          receiveSearch({
+            users: state.users.concat(response.items),
+            searchHeaders: searchHeaders
+          })
+        );
+        checkToDisableInfiniteScroll(response);
+      })
   }
 }
 
@@ -61,6 +72,20 @@ export const updateQuery = function updateQuery(query) {
     query: query
   };
 };
+
+function checkToDisableInfiniteScroll(response) {
+  let state = store.getState();
+
+  if (state.users.length === response.total_count) {
+    store.dispatch(disableInfiniteScroll())
+  }
+}
+
+function disableInfiniteScroll() {
+  return {
+    type: DISABLE_INFINITE_SCROLL
+  };
+}
 
 function requestSearch(query) {
   return {

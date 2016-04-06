@@ -3,7 +3,8 @@ import {
   RECEIVE_PROFILE,
   REQUEST_SEARCH,
   RECEIVE_SEARCH,
-  UPDATE_QUERY
+  UPDATE_QUERY,
+  DISABLE_INFINITE_SCROLL
  } from '../actions'
 
 let counter = function counter(state = { count: 0, users: [], query: '' }, action) {
@@ -39,7 +40,8 @@ let counter = function counter(state = { count: 0, users: [], query: '' }, actio
         loading: false,
         users: action.data.users,
         searchHeaders: action.data.searchHeaders,
-        query: query
+        query: query,
+        canInfiniteScroll: true        
       };
     case UPDATE_QUERY:
       return {
@@ -47,6 +49,14 @@ let counter = function counter(state = { count: 0, users: [], query: '' }, actio
         users: action.query.length < 3 ? [] : users,
         searchHeaders: searchHeaders,
         query: action.query
+      };
+    case DISABLE_INFINITE_SCROLL:
+      return {
+        loading: false,
+        users: users,
+        searchHeaders: searchHeaders,
+        query: query,
+        canInfiniteScroll: false
       };
     default:
       return state;
