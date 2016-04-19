@@ -6,10 +6,10 @@ var classNames = require('classnames');
 class LoadingBarClass extends Component {
   render () {
     const { loading } = this.props
-    var btnClass = classNames('loading', { 'isLoading': this.props.loading })
+    var loadingClass = classNames('loading', { 'isLoading': loading })
 
     return (
-      <div className={btnClass}></div>
+      <div className={loadingClass}></div>
     );
   }
 }
